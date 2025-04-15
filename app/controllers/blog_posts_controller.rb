@@ -1,5 +1,6 @@
 class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
   def index
     @blog_posts = BlogPost.all
   end
@@ -22,7 +23,7 @@ class BlogPostsController < ApplicationController
   
   def show
   end  
-  # The show action is used to display a single blog post.  
+  
   def edit
   end
 
@@ -61,5 +62,10 @@ class BlogPostsController < ApplicationController
   rescue StandardError => e
     flash[:alert] = "An error occurred: #{e.message}"
     redirect_to root_path
+  end
+
+  def authenticate_user!    
+      flash[:alert] = "You must be signed in to access this section."
+      redirect_to new_user_session_path, alert => "You must be signed in to access this section."
   end
 end

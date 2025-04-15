@@ -8,10 +8,12 @@
     <div class="card-body">
       <p class="card-text"><%= @blog_post.body %></p>
     </div>
+    <% if user_signed_in? %>
     <div class="card-footer d-flex justify-content-between">
       <%= link_to 'Edit', edit_blog_post_path(@blog_post), class: 'btn btn-warning' %>
       <%= button_to 'Delete', @blog_post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
       <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
     </div>
+    <% end %>
   </div>
 </div>
