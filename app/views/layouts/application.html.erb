@@ -37,11 +37,26 @@
               <a class="nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
+              <a class="nav-link" href="/pages/about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/contact">Contact</a>
+              <a class="nav-link" href="/pages/contact">Contact</a>
             </li>
+            <% if user_signed_in? %>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Welcome, <%= current_user.email %></a>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'Login', new_user_session_path, class: 'nav-link' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'Sign Up', new_user_registration_path, class: 'nav-link' %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -49,6 +64,8 @@
 
     <!-- Main Content -->
     <main class="container my-4">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </main>
 
