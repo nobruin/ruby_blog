@@ -1,0 +1,30 @@
+<h1 class="text-center my-4">Blog Posts</h1>
+
+<% if @blog_posts.empty? %>
+  <div class="alert alert-warning text-center" role="alert">
+    No blog posts available.
+  </div>
+<% else %>
+  <p class="text-muted text-center">Here are the blog posts:</p>
+<% end %>
+
+<div class="text-center my-3">
+  <%= link_to 'New Blog Post', new_blog_post_path, class: 'btn btn-primary' %>
+</div>
+
+<% if @blog_posts.any? %>
+  <h2 class="mt-4">Blog Posts List</h2>
+  <ul class="list-group">
+    <% @blog_posts.each do |post| %>
+      <li class="list-group-item">
+        <%= link_to post.title, post, class: 'text-decoration-none' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <div class="alert alert-warning text-center" role="alert">
+    No blog posts available.
+  </div>
+<% end %>
+
+
