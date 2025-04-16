@@ -8,10 +8,8 @@ draft:
 
 published:
   title: PUBLISHED post
-  content: PUBLISHED content
   published_at: <%= Time.now - 1.day %>
 
 scheduled:
   title: SCHEDULED post
-  content: SCHEDULED content
   published_at: <%= Time.now + 1.day %>

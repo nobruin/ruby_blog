@@ -12,3 +12,9 @@ user.update!(
     password: "password",
     password_confirmation: "password",
 )
+
+100.times do |n|
+    BlogPost.create title: "Blog Post #{n}",
+        content: "This is the content of blog post #{n}.",
+        published_at: n.even? ? Time.current : nil
+end

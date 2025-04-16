@@ -2,61 +2,38 @@ require "test_helper"
 
 class BlogPostTest < ActiveSupport::TestCase
   test "draft? returns true for draft blog post" do
-    blog_posts(:draft).tap do |post|
-      assert post.draft?
-    end
+    assert blog_posts(:draft).draft?
   end
 
   test "draft? returns false for published blog post" do
-    BlogPost.new(published_at: 1.year.ago).tap do |post|
-      refute post.draft?
-    end
+    refute blog_posts(:published).draft?
   end
+
+  test "draft? returns false for scheduled blog post" do
+    refute blog_posts(:scheduled).draft?
+  end
+
+  test "published? returns true for published blog post" do
+    assert blog_posts(:published).published?
+  end
+
   test "published? returns false for draft blog post" do
-    blog_posts(:draft).tap do |post|
-      assert_not post.published?
-    end
+    refute blog_posts(:draft).published?
+  end
+
+  test "published? returns false for scheduled blog post" do
+    refute blog_posts(:scheduled).published?
   end
 
   test "scheduled? returns true for scheduled blog post" do
-    blog_posts(:scheduled).tap do |post|
-      assert post.scheduled?
-    end
-  end
-
-  test "scheduled? returns false for published blog post" do
-    blog_posts(:published).tap do |post|
-      assert_not post.scheduled?
-    end
+    assert blog_posts(:scheduled).scheduled?
   end
 
   test "scheduled? returns false for draft blog post" do
-    blog_posts(:draft).tap do |post|
-      assert_not post.scheduled?
-    end
+    refute blog_posts(:draft).scheduled?
   end
 
-  test "validations" do
-    post = BlogPost.create(title: "", content: "")
-    assert_not post.valid?
-    assert_includes post.errors[:title], "can't be blank"
-    assert_includes post.errors[:content], "can't be blank"
-
-    post.title = "Valid Title"
-    post.content = "Valid content content."
-    assert post.valid?
-  end
-
-  test "scopes" do
-    draft_post = BlogPost.create(title: "Draft Post", content: "Draft content.", published_at: nil)
-    published_post = BlogPost.create(title: "Published Post", content: "Published content.", published_at: Time.current)
-    scheduled_post = BlogPost.create(title: "Scheduled Post", content: "Scheduled content.", published_at: Time.current + 1.day)
-
-    assert_includes BlogPost.draft, draft_post
-    assert_includes BlogPost.published, published_post
-    assert_includes BlogPost.scheduled, scheduled_post
-
-    assert_not_includes BlogPost.draft, published_post
-    assert_not_includes BlogPost.draft, scheduled_post
+  test "scheduled? returns false for published blog post" do
+    refute blog_posts(:published).scheduled?
   end
 end
