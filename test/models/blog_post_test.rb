@@ -37,20 +37,20 @@ class BlogPostTest < ActiveSupport::TestCase
   end
 
   test "validations" do
-    post = BlogPost.create(title: "", body: "")
+    post = BlogPost.create(title: "", content: "")
     assert_not post.valid?
     assert_includes post.errors[:title], "can't be blank"
-    assert_includes post.errors[:body], "can't be blank"
+    assert_includes post.errors[:content], "can't be blank"
 
     post.title = "Valid Title"
-    post.body = "Valid body content."
+    post.content = "Valid content content."
     assert post.valid?
   end
 
   test "scopes" do
-    draft_post = BlogPost.create(title: "Draft Post", body: "Draft content.", published_at: nil)
-    published_post = BlogPost.create(title: "Published Post", body: "Published content.", published_at: Time.current)
-    scheduled_post = BlogPost.create(title: "Scheduled Post", body: "Scheduled content.", published_at: Time.current + 1.day)
+    draft_post = BlogPost.create(title: "Draft Post", content: "Draft content.", published_at: nil)
+    published_post = BlogPost.create(title: "Published Post", content: "Published content.", published_at: Time.current)
+    scheduled_post = BlogPost.create(title: "Scheduled Post", content: "Scheduled content.", published_at: Time.current + 1.day)
 
     assert_includes BlogPost.draft, draft_post
     assert_includes BlogPost.published, published_post

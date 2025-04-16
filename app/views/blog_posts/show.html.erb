@@ -1,19 +1,22 @@
-<div class="container my-4">
-  <h1 class="text-center mb-4">Blog Post Details</h1>
+<div class="container mt-5">
+    <div class="mx-auto p-5 shadow-sm">
+        <h2 class="text-center mb-4 fw-semibold">Blog Post</h2>
 
-  <div class="card shadow">
-    <div class="card-header bg-primary text-light">
-      <h2 class="card-title mb-0"><%= @blog_post.title %></h2>
+        <dl class="row mb-4">
+            <dt class="col-sm-3 text-muted text-uppercase small">Title</dt>
+            <dd class="col-sm-9 mb-2"><%= @blog_post.title %></dd>
+
+            <dt class="col-sm-3 text-muted text-uppercase small">Content</dt>
+            <dd class="col-sm-9 mb-2"><%= @blog_post.content %></dd>
+
+            <dt class="col-sm-3 text-muted text-uppercase small">Published At</dt>
+            <dd class="col-sm-9">
+                <%= @blog_post.published_at.present? ? l(@blog_post.published_at, format: :long) : "Not scheduled" %>
+            </dd>
+        </dl>
+
+        <div class="d-flex justify-content-start gap-2">
+            <%= link_to 'Edit', edit_blog_post_path(@blog_post), class: 'btn btn-primary btn-lg me-2' %>
+            <%= link_to 'Back', root_path, class: 'btn btn-secondary btn-lg' %> </div>
     </div>
-    <div class="card-body">
-      <p class="card-text"><%= @blog_post.body %></p>
-    </div>
-    <% if user_signed_in? %>
-    <div class="card-footer d-flex justify-content-between">
-      <%= link_to 'Edit', edit_blog_post_path(@blog_post), class: 'btn btn-warning' %>
-      <%= button_to 'Delete', @blog_post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-      <%= link_to 'Back', root_path, class: 'btn btn-secondary' %>
-    </div>
-    <% end %>
-  </div>
 </div>

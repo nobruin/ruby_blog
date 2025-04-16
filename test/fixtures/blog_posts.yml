@@ -2,16 +2,16 @@
 
 draft:
   title: DRAFT post
-  body: DRAFT body
+  content: DRAFT content
   published_at: null
   
 
 published:
   title: PUBLISHED post
-  body: PUBLISHED body
+  content: PUBLISHED content
   published_at: <%= Time.now - 1.day %>
 
 scheduled:
   title: SCHEDULED post
-  body: SCHEDULED body
+  content: SCHEDULED content
   published_at: <%= Time.now + 1.day %>
