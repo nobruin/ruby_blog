@@ -1,8 +1,8 @@
 class BlogPostsController < ApplicationController
-  before_action :set_blog_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_blog_post, only: [ :show, :edit, :update, :destroy ]
+  before_action :authenticate_user!, except: [ :index, :show ]
   def index
-    @blog_posts = user_signed_in? ? BlogPost.sorted.all : BlogPost.sorted.published 
+    @blog_posts = user_signed_in? ? BlogPost.sorted.all : BlogPost.sorted.published
   end
 
   def new
@@ -20,10 +20,10 @@ class BlogPostsController < ApplicationController
     end
   end
 
-  
+
   def show
-  end  
-  
+  end
+
   def edit
   end
 
@@ -44,7 +44,7 @@ class BlogPostsController < ApplicationController
     else
       flash[:alert] = "Error deleting blog post."
       redirect_to @blog_post
-    end 
+    end
   end
 
   private
@@ -64,7 +64,7 @@ class BlogPostsController < ApplicationController
     redirect_to root_path
   end
 
-  def authenticate_user?    
+  def authenticate_user?
       flash[:alert] = "You must be signed in to access this section."
       redirect_to new_user_session_path, alert => "You must be signed in to access this section."
   end
